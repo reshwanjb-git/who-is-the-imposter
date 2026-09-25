@@ -31,7 +31,7 @@ import { makeToken } from './token';
 import { generateRoomCode } from './room-code';
 import { generateQuestionPair } from './question-generator';
 import { buildExplainPrompt, parseExplanation, validateExplainInput, EXPLAIN_UI_TEXT } from './explain-prompt';
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenAI } from '@google/genai';
 import type {
   Answer,
   CategorySetting,
@@ -477,7 +477,7 @@ export class GameEngine {
     const validation = validateExplainInput(rawWord);
     if (!validation.ok) return { ok: false, text: validation.message[room.language] };
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return {
         ok: false,
@@ -486,17 +486,13 @@ export class GameEngine {
     }
 
     try {
-      const client = new Anthropic({ apiKey });
+      const client = new GoogleGenAI({ apiKey });
       const prompt = buildExplainPrompt({ word: validation.word, language: room.language });
-      const response = await client.messages.create({
-        model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5-20250929',
-        max_tokens: 60,
-        messages: [{ role: 'user', content: prompt }],
+      const response = await client.models.generateContent({
+        model: process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite',
+        contents: prompt,
       });
-      const text = response.content
-        .filter((b): b is Anthropic.TextBlock => b.type === 'text')
-        .map((b) => b.text)
-        .join('');
+      const text = response.text ?? '';
       return { ok: true, text: parseExplanation(text) };
     } catch (err) {
       // eslint-disable-next-line no-console

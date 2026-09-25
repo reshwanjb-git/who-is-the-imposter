@@ -1,13 +1,13 @@
 /**
  * lib/question-generator.ts
  *
- * Verbindt lib/question-prompt.ts (de prompt-bouwer) met de Anthropic API, met
+ * Verbindt lib/question-prompt.ts (de prompt-bouwer) met de Gemini API, met
  * een garantie: deze functie faalt NOOIT. Als er geen key is, de call mislukt,
  * of het antwoord geen geldige JSON is, valt hij terug op
  * lib/fallback-questions.ts. De app is dus altijd speelbaar.
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenAI } from '@google/genai';
 import { buildQuestionPrompt, parseQuestionPair } from './question-prompt';
 import { pickFallbackPairForCategory } from './fallback-questions';
 import { pickRandomCategory, type CategoryId, type Language } from './categories';
@@ -20,9 +20,9 @@ export interface GeneratedQuestion {
   source_key: string;
 }
 
-// Zie https://docs.claude.com/en/docs/about-claude/models voor de actuele modellijst.
-// Overschrijf via ANTHROPIC_MODEL in de Vercel env vars als dit model ooit vervangen wordt.
-const DEFAULT_MODEL = 'claude-sonnet-4-5-20250929';
+// Zie https://ai.google.dev/gemini-api/docs/models voor de actuele modellijst.
+// Overschrijf via GEMINI_MODEL in de Vercel env vars als dit model ooit vervangen wordt.
+const DEFAULT_MODEL = 'gemini-3.5-flash-lite';
 
 export async function generateQuestionPair(opts: {
   language: Language;
@@ -35,7 +35,7 @@ export async function generateQuestionPair(opts: {
   const resolvedCategory: CategoryId =
     opts.category === 'random' ? pickRandomCategory(opts.previousCategory ?? undefined) : opts.category;
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
 
   if (apiKey) {
     try {
@@ -46,17 +46,13 @@ export async function generateQuestionPair(opts: {
         playerCount: opts.playerCount,
       });
 
-      const client = new Anthropic({ apiKey });
-      const response = await client.messages.create({
-        model: process.env.ANTHROPIC_MODEL || DEFAULT_MODEL,
-        max_tokens: 500,
-        messages: [{ role: 'user', content: prompt }],
+      const client = new GoogleGenAI({ apiKey });
+      const response = await client.models.generateContent({
+        model: process.env.GEMINI_MODEL || DEFAULT_MODEL,
+        contents: prompt,
       });
 
-      const text = response.content
-        .filter((block): block is Anthropic.TextBlock => block.type === 'text')
-        .map((block) => block.text)
-        .join('');
+      const text = response.text ?? '';
 
       const pair = parseQuestionPair(text);
 

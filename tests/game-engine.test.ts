@@ -186,15 +186,15 @@ test('dubbele naam krijgt automatisch een nummer erachter', async () => {
   assert.equal(third.player.name, 'Robin 3');
 });
 
-test('app werkt zonder ANTHROPIC_API_KEY: fallback-vragen worden gebruikt', async () => {
-  const originalKey = process.env.ANTHROPIC_API_KEY;
-  delete process.env.ANTHROPIC_API_KEY;
+test('app werkt zonder GEMINI_API_KEY: fallback-vragen worden gebruikt', async () => {
+  const originalKey = process.env.GEMINI_API_KEY;
+  delete process.env.GEMINI_API_KEY;
   try {
     const { engine, store, players } = await setupRoom(['Fox', 'Owl', 'Bee', 'Ant']);
     await engine.startRound(players[0].token);
     const state = await engine.getClientState(players[0].token);
     assert.ok(state.me.my_question, 'moet een vraag krijgen, ook zonder API-key (fallback)');
   } finally {
-    if (originalKey) process.env.ANTHROPIC_API_KEY = originalKey;
+    if (originalKey) process.env.GEMINI_API_KEY = originalKey;
   }
 });

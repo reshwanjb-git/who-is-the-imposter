@@ -2,7 +2,7 @@
  * lib/fallback-questions.ts
  *
  * 25 handgemaakte vraagparen, gebruikt wanneer:
- *  - er nog geen ANTHROPIC_API_KEY is ingesteld,
+ *  - er nog geen GEMINI_API_KEY is ingesteld,
  *  - de API-call faalt, of
  *  - het model ongeldige/onvolledige JSON teruggeeft.
  *
