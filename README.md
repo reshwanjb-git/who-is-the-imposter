@@ -1,4 +1,4 @@
-# Wie is de Imposter
+# Who is the Imposter
 
 Multiplayer "Wie is de imposter"-partyspel voor 3–10 spelers, gebouwd met
 React + Vite + TypeScript, Vercel serverless functions en Supabase

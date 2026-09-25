@@ -51,7 +51,7 @@ export function JoinScreen({
     return (
       <div className="screen center-text">
         <div className="spacer" />
-        <h1>🕵️ Wie is de Imposter</h1>
+        <h1>🕵️ Who is the Imposter</h1>
         <p>Een partyspel voor 3–10 spelers. Iedereen krijgt dezelfde vraag — behalve één.</p>
         <div className="row row-full">
           <button type="button" className="btn-primary" onClick={() => setMode('create')}>
