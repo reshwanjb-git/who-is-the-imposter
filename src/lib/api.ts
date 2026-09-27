@@ -27,8 +27,8 @@ async function call<T>(path: string, options?: RequestInit): Promise<T> {
   return body as T;
 }
 
-function post<T>(path: string, payload: Record<string, unknown>): Promise<T> {
-  return call<T>(path, { method: 'POST', body: JSON.stringify(payload) });
+function post<T>(action: string, payload: Record<string, unknown>): Promise<T> {
+  return call<T>('game', { method: 'POST', body: JSON.stringify({ action, ...payload }) });
 }
 
 export interface JoinResult {
