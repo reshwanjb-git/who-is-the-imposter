@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ClientState } from '@lib/types';
 import { api, ApiError } from '@/lib/api';
 import { sound } from '@/lib/sound';
+import { Icon } from '@/components/Icon';
 
 export function Voting({ state, token, onChanged }: { state: ClientState; token: string; onChanged: () => void }) {
   const [busy, setBusy] = useState(false);
@@ -27,7 +28,7 @@ export function Voting({ state, token, onChanged }: { state: ClientState; token:
     <>
       {state.round && state.round.tiebreak_number > 0 && (
         <div className="badge" style={{ alignSelf: 'center' }}>
-          ⚖️ {language === 'nl' ? 'Gelijkspel — extra stemronde' : 'Tie — extra voting round'}
+          <Icon name="scale" /> {language === 'nl' ? 'Gelijkspel — extra stemronde' : 'Tie — extra voting round'}
         </div>
       )}
 
@@ -55,7 +56,7 @@ export function Voting({ state, token, onChanged }: { state: ClientState; token:
                 {p.name}
                 {p.id === state.me.id ? ` (${language === 'nl' ? 'jij' : 'you'})` : ''}
               </span>
-              {isMine && <span>✓</span>}
+              {isMine && <Icon name="check" />}
             </button>
           );
         })}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ClientState } from '@lib/types';
 import { CATEGORIES } from '@lib/categories';
 import { api, ApiError } from '@/lib/api';
+import { Icon } from '@/components/Icon';
 
 export function HostPanel({ state, token, onChanged }: { state: ClientState; token: string; onChanged: () => void }) {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ export function HostPanel({ state, token, onChanged }: { state: ClientState; tok
   if (!open) {
     return (
       <button type="button" className="btn-ghost" onClick={() => setOpen(true)}>
-        ⚙️ Host-opties
+        <Icon name="gear" /> Host-opties
       </button>
     );
   }
@@ -32,7 +33,7 @@ export function HostPanel({ state, token, onChanged }: { state: ClientState; tok
       <div className="top-bar">
         <h3 style={{ margin: 0 }}>Host-opties</h3>
         <button type="button" className="icon-btn" onClick={() => setOpen(false)}>
-          ✕
+          <Icon name="close" />
         </button>
       </div>
 
@@ -45,7 +46,7 @@ export function HostPanel({ state, token, onChanged }: { state: ClientState; tok
           style={{ width: '100%', marginTop: 10 }}
           onClick={() => run(() => api.forceAdvance(token))}
         >
-          ⏭️ Iedereen laten doorgaan (AFK forceren)
+          <Icon name="skip" /> Iedereen laten doorgaan (AFK forceren)
         </button>
       )}
 
@@ -78,7 +79,7 @@ export function HostPanel({ state, token, onChanged }: { state: ClientState; tok
               className={state.room.category === 'random' ? 'btn-primary' : 'btn-ghost'}
               onClick={() => run(() => api.updateSettings(token, { category: 'random' }))}
             >
-              🎲 Willekeurig
+              <Icon name="dice" /> Willekeurig
             </button>
             {CATEGORIES.map((c) => (
               <button
@@ -105,7 +106,7 @@ export function HostPanel({ state, token, onChanged }: { state: ClientState; tok
                 <span className="name">{p.name}</span>
               </div>
               <button type="button" className="btn-ghost" onClick={() => run(() => api.transferHost(token, p.id))}>
-                👑 Maak host
+                <Icon name="crown" /> Maak host
               </button>
               <button type="button" className="btn-danger" onClick={() => run(() => api.kick(token, p.id))}>
                 Kick

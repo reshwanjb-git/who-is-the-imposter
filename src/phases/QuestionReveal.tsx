@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { ClientState } from '@lib/types';
 import { api, ApiError } from '@/lib/api';
 import { sound } from '@/lib/sound';
+import { Icon } from '@/components/Icon';
 
 export function QuestionReveal({
   state,
@@ -47,7 +48,7 @@ export function QuestionReveal({
 
       {isImposter && (
         <div className="card center-text imposter-flash" style={{ borderColor: 'var(--danger)' }}>
-          <h2>🎭 {language === 'nl' ? 'Jij had een andere vraag.' : 'You had a different question.'}</h2>
+          <h2><Icon name="mask" className="ico-lg" /> {language === 'nl' ? 'Jij had een andere vraag.' : 'You had a different question.'}</h2>
           <p style={{ color: 'var(--cream)' }}>
             {language === 'nl' ? 'Jij bent de imposter.' : 'You are the imposter.'}
           </p>

@@ -1,12 +1,19 @@
 :root {
-  --bg: #1a2332;
-  --bg-deep: #10161f;
-  --accent: #2d8b8b;
-  --accent-light: #3aa6a6;
-  --seafoam: #a8dadc;
-  --cream: #f1faee;
-  --danger: #e07a5f;
-  --radius: 16px;
+  --bg: #0b1220;
+  --bg-deep: #060a12;
+  --mid: #14233d;
+  --accent: #3fc7f4;
+  --accent-light: #7ddcf9;
+  --bright: #aef1ff;
+  --seafoam: #bfe9f4;
+  --cream: #f3fbff;
+  --danger: #ff8a65;
+  --card-1: rgba(63, 199, 244, 0.12);
+  --card-2: rgba(6, 10, 18, 0.6);
+  --line: rgba(125, 220, 249, 0.22);
+  --ico-1: var(--accent-light);
+  --ico-2: var(--seafoam);
+  --radius: 20px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
@@ -20,24 +27,27 @@
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 body {
   margin: 0;
   min-height: 100dvh;
-  background: radial-gradient(120% 100% at 50% 0%, var(--bg) 0%, var(--bg-deep) 100%);
+  background: radial-gradient(140% 85% at 50% -8%, rgba(63, 199, 244, 0.18) 0%, var(--mid) 32%, var(--bg-deep) 78%);
   color: var(--cream);
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: contain;
-  touch-action: manipulation;
+  touch-action: pan-y;
 }
 
 #root {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 h1,
@@ -46,12 +56,16 @@ h3 {
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 0 0 8px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 p {
   margin: 0 0 12px;
   line-height: 1.5;
   color: var(--seafoam);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 button,
@@ -66,16 +80,17 @@ textarea {
   font-size: 16px; /* voorkomt zoom-in bij focus in Safari */
   width: 100%;
   max-width: 100%;
-  border-radius: 12px;
-  border: 1px solid rgba(168, 218, 220, 0.35);
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   color: var(--cream);
   padding: 14px 16px;
+  touch-action: manipulation;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: rgba(241, 250, 238, 0.45);
+  color: rgba(243, 251, 255, 0.4);
 }
 
 input:focus,
@@ -87,17 +102,18 @@ textarea:focus {
 button {
   cursor: pointer;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 16px;
   font-weight: 600;
   padding: 14px 18px;
   color: var(--cream);
-  background: rgba(255, 255, 255, 0.06);
-  transition: transform 0.08s ease, background 0.2s ease, opacity 0.2s ease;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  transition: transform 0.08s ease, background 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  touch-action: manipulation;
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 button:disabled {
@@ -106,22 +122,29 @@ button:disabled {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, #1f9bd0 100%);
+  box-shadow: 0 6px 18px rgba(63, 199, 244, 0.28);
 }
 
 .btn-primary:not(:disabled):hover {
-  background: var(--accent-light);
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+  transform: translateY(-1px);
 }
 
 .btn-ghost {
-  background: transparent;
-  border: 1px solid rgba(168, 218, 220, 0.35);
+  background: linear-gradient(160deg, rgba(125, 220, 249, 0.08), rgba(125, 220, 249, 0.02));
+  border: 1px solid var(--line);
+}
+
+.btn-ghost:not(:disabled):hover {
+  border-color: var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(125, 220, 249, 0.12);
 }
 
 .btn-danger {
-  background: rgba(224, 122, 95, 0.18);
+  background: linear-gradient(160deg, rgba(255, 138, 101, 0.22), rgba(255, 138, 101, 0.1));
   color: var(--danger);
-  border: 1px solid rgba(224, 122, 95, 0.4);
+  border: 1px solid rgba(255, 138, 101, 0.4);
 }
 
 .screen {
@@ -134,13 +157,24 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow-x: hidden;
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(168, 218, 220, 0.18);
+  position: relative;
+  background: linear-gradient(155deg, var(--card-1), var(--card-2));
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 18px;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 60% at 50% -10%, rgba(174, 241, 255, 0.14) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .row {
@@ -162,9 +196,10 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(45, 139, 139, 0.25);
+  background: linear-gradient(135deg, rgba(63, 199, 244, 0.28), rgba(63, 199, 244, 0.1));
+  border: 1px solid var(--line);
   color: var(--seafoam);
   font-size: 13px;
   font-weight: 600;
@@ -175,9 +210,9 @@ button:disabled {
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(168, 218, 220, 0.12);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(125, 220, 249, 0.14);
   flex: 1 1 calc(50% - 6px);
   min-width: 0;
 }
@@ -204,13 +239,13 @@ button:disabled {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: rgba(241, 250, 238, 0.25);
+  background: rgba(243, 251, 255, 0.22);
   flex-shrink: 0;
 }
 
 .status-dot.done {
   background: var(--accent-light);
-  box-shadow: 0 0 0 3px rgba(58, 166, 166, 0.25);
+  box-shadow: 0 0 0 3px rgba(63, 199, 244, 0.28);
 }
 
 .top-bar {
@@ -226,15 +261,18 @@ button:disabled {
   letter-spacing: 0.08em;
   color: var(--cream);
   text-align: center;
+  text-shadow: 0 0 24px rgba(63, 199, 244, 0.45);
 }
 
 .error-banner {
-  background: rgba(224, 122, 95, 0.15);
-  border: 1px solid rgba(224, 122, 95, 0.4);
+  background: linear-gradient(160deg, rgba(255, 138, 101, 0.16), rgba(255, 138, 101, 0.06));
+  border: 1px solid rgba(255, 138, 101, 0.4);
   color: var(--danger);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 12px 14px;
   font-size: 14px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .toast {
@@ -242,13 +280,13 @@ button:disabled {
   left: max(16px, var(--safe-left));
   right: max(16px, var(--safe-right));
   bottom: calc(20px + var(--safe-bottom));
-  background: var(--bg-deep);
+  background: linear-gradient(160deg, var(--mid), var(--bg-deep));
   border: 1px solid var(--accent-light);
   color: var(--cream);
   padding: 14px 16px;
-  border-radius: 14px;
+  border-radius: 16px;
   z-index: 50;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 24px rgba(63, 199, 244, 0.18);
 }
 
 .reveal-pulse {
@@ -258,10 +296,10 @@ button:disabled {
 @keyframes pulseGlow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(45, 139, 139, 0.35);
+    box-shadow: 0 0 0 0 rgba(63, 199, 244, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 14px rgba(45, 139, 139, 0);
+    box-shadow: 0 0 0 16px rgba(63, 199, 244, 0);
   }
 }
 
@@ -286,7 +324,7 @@ button:disabled {
 
 @keyframes imposterFlash {
   0% {
-    background: rgba(224, 122, 95, 0.4);
+    background: rgba(255, 138, 101, 0.4);
   }
   100% {
     background: transparent;
@@ -298,7 +336,7 @@ button:disabled {
 }
 
 .muted {
-  color: rgba(241, 250, 238, 0.6);
+  color: rgba(243, 251, 255, 0.6);
   font-size: 14px;
 }
 
@@ -317,12 +355,12 @@ button:disabled {
   min-width: 44px;
   font-size: 22px;
   padding: 10px 0;
-  background: rgba(255, 255, 255, 0.04);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
 }
 
 .emoji-grid button.selected {
-  background: var(--accent);
-  box-shadow: 0 0 0 2px var(--seafoam);
+  background: linear-gradient(135deg, var(--accent), #1f9bd0);
+  box-shadow: 0 0 0 3px rgba(174, 241, 255, 0.5);
 }
 
 .icon-btn {
@@ -332,7 +370,19 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(125, 220, 249, 0.1), rgba(125, 220, 249, 0.03));
+  border-radius: 14px;
   flex: none;
+}
+
+.ico {
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.2em;
+  flex-shrink: 0;
+}
+
+.ico-lg {
+  width: 2.6em;
+  height: 2.6em;
 }

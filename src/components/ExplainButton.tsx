@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { api } from '@/lib/api';
 import type { Language } from '@lib/categories';
+import { Icon } from '@/components/Icon';
 
 const TEXT: Record<Language, { button: string; placeholder: string; loading: string; ask: string }> = {
   nl: { button: 'Woord niet duidelijk?', placeholder: 'Typ het woord', loading: 'Even kijken…', ask: 'Vraag uitleg' },
@@ -57,7 +58,7 @@ export function ExplainButton({ token, language }: { token: string; language: La
           {busy ? t.loading : t.ask}
         </button>
         <button type="button" className="btn-ghost" onClick={() => setOpen(false)}>
-          ✕
+          <Icon name="close" />
         </button>
       </div>
       {result && <p style={{ marginTop: 10 }}>{result}</p>}

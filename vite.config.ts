@@ -10,7 +10,7 @@ export default defineConfig({
       includeAssets: ['icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'],
       manifest: {
         name: 'Who is the Imposter',
-        short_name: 'Imposter',
+        short_name: 'Who is the Imposter',
         description: 'Multiplayer partyspel: ontdek wie de imposter is.',
         theme_color: '#1a2332',
         background_color: '#1a2332',

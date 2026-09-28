@@ -4,6 +4,7 @@ import { PlayerList } from '@/components/PlayerList';
 import { QRCodeImage } from '@/components/QRCode';
 import { api, ApiError } from '@/lib/api';
 import { joinUrlFor } from '@/lib/url';
+import { Icon } from '@/components/Icon';
 
 export function Lobby({ state, token, onChanged }: { state: ClientState; token: string; onChanged: () => void }) {
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +45,7 @@ export function Lobby({ state, token, onChanged }: { state: ClientState; token: 
           <QRCodeImage url={url} />
         </div>
         <button type="button" className="btn-ghost" onClick={copyLink}>
-          {copied ? '✓ Link gekopieerd' : '🔗 Kopieer joinlink'}
+          {copied ? (<><Icon name="check" /> Link gekopieerd</>) : (<><Icon name="link" /> Kopieer joinlink</>)}
         </button>
       </div>
 
@@ -58,7 +59,7 @@ export function Lobby({ state, token, onChanged }: { state: ClientState; token: 
 
       {state.me.is_host ? (
         <button type="button" className="btn-primary" disabled={!enoughPlayers || starting} onClick={start}>
-          {starting ? 'Ronde wordt gestart…' : '▶️ Start ronde'}
+          {starting ? 'Ronde wordt gestart…' : (<><Icon name="play" /> Start ronde</>)}
         </button>
       ) : (
         <p className="muted center-text">Wachten tot de host de ronde start…</p>

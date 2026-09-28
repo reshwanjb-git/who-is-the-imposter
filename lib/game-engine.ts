@@ -31,7 +31,6 @@ import { makeToken } from './token';
 import { generateRoomCode } from './room-code';
 import { generateQuestionPair } from './question-generator';
 import { buildExplainPrompt, parseExplanation, validateExplainInput, EXPLAIN_UI_TEXT } from './explain-prompt';
-import { GoogleGenAI } from '@google/genai';
 import type {
   Answer,
   CategorySetting,
@@ -486,6 +485,7 @@ export class GameEngine {
     }
 
     try {
+      const { GoogleGenAI } = await import('@google/genai');
       const client = new GoogleGenAI({ apiKey });
       const prompt = buildExplainPrompt({ word: validation.word, language: room.language });
       const response = await client.models.generateContent({

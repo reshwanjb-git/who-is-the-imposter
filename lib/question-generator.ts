@@ -7,7 +7,6 @@
  * lib/fallback-questions.ts. De app is dus altijd speelbaar.
  */
 
-import { GoogleGenAI } from '@google/genai';
 import { buildQuestionPrompt, parseQuestionPair } from './question-prompt';
 import { pickFallbackPairForCategory } from './fallback-questions';
 import { pickRandomCategory, type CategoryId, type Language } from './categories';
@@ -46,6 +45,7 @@ export async function generateQuestionPair(opts: {
         playerCount: opts.playerCount,
       });
 
+      const { GoogleGenAI } = await import('@google/genai');
       const client = new GoogleGenAI({ apiKey });
       const response = await client.models.generateContent({
         model: process.env.GEMINI_MODEL || DEFAULT_MODEL,

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ClientState } from '@lib/types';
 import { api, ApiError } from '@/lib/api';
+import { Icon } from '@/components/Icon';
 
 export function Result({ state, token, onChanged }: { state: ClientState; token: string; onChanged: () => void }) {
   const [busy, setBusy] = useState(false);
@@ -30,7 +31,7 @@ export function Result({ state, token, onChanged }: { state: ClientState; token:
   return (
     <>
       <div className={`card center-text fade-in`} style={{ borderColor: result.imposter_caught ? 'var(--accent)' : 'var(--danger)' }}>
-        <h1>{result.imposter_caught ? '🎉' : '🎭'}</h1>
+        <h1><Icon name={result.imposter_caught ? 'trophy' : 'mask'} className="ico-lg" /></h1>
         <h2>
           {result.imposter_caught
             ? language === 'nl'
@@ -82,7 +83,7 @@ export function Result({ state, token, onChanged }: { state: ClientState; token:
 
       {state.me.is_host ? (
         <button type="button" className="btn-primary" disabled={busy} onClick={newRound}>
-          {busy ? '…' : language === 'nl' ? '🔁 Nieuwe ronde' : '🔁 New round'}
+          {busy ? '…' : (<><Icon name="refresh" /> {language === 'nl' ? 'Nieuwe ronde' : 'New round'}</>)}
         </button>
       ) : (
         <p className="muted center-text">

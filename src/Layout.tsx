@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { ClientState } from '@lib/types';
 import { MuteButton } from '@/components/MuteButton';
 import { HostPanel } from '@/components/HostPanel';
+import { Icon } from '@/components/Icon';
 
 export function Layout({
   state,
@@ -19,11 +20,11 @@ export function Layout({
   return (
     <div className="screen">
       <div className="top-bar">
-        <span className="badge">🔑 {state.room.code}</span>
+        <span className="badge"><Icon name="key" /> {state.room.code}</span>
         <div className="row" style={{ flex: 'none', width: 'auto' }}>
           <MuteButton />
           <button type="button" className="icon-btn" onClick={onLeave} title="Room verlaten" aria-label="Room verlaten">
-            🚪
+            <Icon name="door" />
           </button>
         </div>
       </div>

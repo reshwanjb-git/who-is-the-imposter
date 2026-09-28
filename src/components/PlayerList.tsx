@@ -1,4 +1,5 @@
 import type { PublicPlayer } from '@lib/types';
+import { Icon } from '@/components/Icon';
 
 export function PlayerList({
   players,
@@ -22,7 +23,7 @@ export function PlayerList({
               {p.name}
               {p.id === meId ? ' (jij)' : ''}
             </span>
-            {p.is_host && <span title="Host">👑</span>}
+            {p.is_host && <Icon name="crown" title="Host" />}
             {done !== undefined && <span className={`status-dot${done ? ' done' : ''}`} />}
           </div>
         );

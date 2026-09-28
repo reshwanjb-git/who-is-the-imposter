@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { sound } from '@/lib/sound';
+import { Icon } from '@/components/Icon';
 
 export function MuteButton() {
   const [muted, setMuted] = useState(sound.isMuted());
@@ -11,7 +12,7 @@ export function MuteButton() {
       aria-label={muted ? 'Geluid aanzetten' : 'Geluid uitzetten'}
       title={muted ? 'Geluid aan' : 'Geluid uit'}
     >
-      {muted ? '🔇' : '🔊'}
+      <Icon name={muted ? 'volume-off' : 'volume-on'} />
     </button>
   );
 }

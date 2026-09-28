@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ClientState } from '@lib/types';
 import { api, ApiError } from '@/lib/api';
+import { Icon } from '@/components/Icon';
 
 export function AnswersPhase({
   state,
@@ -56,7 +57,7 @@ export function AnswersPhase({
 
       {state.me.is_host && (
         <button type="button" className="btn-primary" disabled={busy} onClick={startVoting}>
-          {language === 'nl' ? '🗳️ Start stemmen' : '🗳️ Start voting'}
+          <Icon name="ballot" /> {language === 'nl' ? 'Start stemmen' : 'Start voting'}
         </button>
       )}
     </>

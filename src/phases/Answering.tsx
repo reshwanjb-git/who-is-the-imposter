@@ -5,6 +5,7 @@ import { PlayerList } from '@/components/PlayerList';
 import { ExplainButton } from '@/components/ExplainButton';
 import { api, ApiError } from '@/lib/api';
 import { sound } from '@/lib/sound';
+import { Icon } from '@/components/Icon';
 
 export function Answering({ state, token, onChanged }: { state: ClientState; token: string; onChanged: () => void }) {
   const [text, setText] = useState(state.me.my_answer ?? '');
@@ -17,7 +18,7 @@ export function Answering({ state, token, onChanged }: { state: ClientState; tok
   if (!state.me.my_question) {
     return (
       <div className="card center-text">
-        <h2>⏳ Wachtscherm</h2>
+        <h2><Icon name="hourglass" /> Wachtscherm</h2>
         <p>
           {language === 'nl'
             ? 'Er loopt al een ronde. Je doet mee vanaf de volgende ronde.'
@@ -66,15 +67,17 @@ export function Answering({ state, token, onChanged }: { state: ClientState; tok
       {error && <div className="error-banner">{error}</div>}
 
       <button type="button" className="btn-primary" disabled={busy || alreadyAnswered || !text.trim()} onClick={submit}>
-        {alreadyAnswered
-          ? language === 'nl'
-            ? '✓ Antwoord verzonden — wachten op de rest'
-            : '✓ Answer submitted — waiting for others'
-          : busy
-            ? '…'
-            : language === 'nl'
-              ? 'Verstuur antwoord'
-              : 'Submit answer'}
+        {alreadyAnswered ? (
+          <>
+            <Icon name="check" /> {language === 'nl' ? 'Antwoord verzonden — wachten op de rest' : 'Answer submitted — waiting for others'}
+          </>
+        ) : busy ? (
+          '…'
+        ) : language === 'nl' ? (
+          'Verstuur antwoord'
+        ) : (
+          'Submit answer'
+        )}
       </button>
 
       <div className="card">
