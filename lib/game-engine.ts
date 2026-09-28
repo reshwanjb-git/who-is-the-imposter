@@ -82,7 +82,7 @@ export class GameEngine {
 
     const room = await this.store.insertRoom({
       code,
-      host_player_id: '',
+      host_player_id: null,
       phase: 'lobby',
       language: input.language,
       category: input.category,

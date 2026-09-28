@@ -21,7 +21,7 @@ export type CategorySetting = CategoryId | 'random';
 export interface Room {
   id: string;
   code: string;
-  host_player_id: string;
+  host_player_id: string | null;
   phase: Phase;
   language: Language;
   category: CategorySetting;
