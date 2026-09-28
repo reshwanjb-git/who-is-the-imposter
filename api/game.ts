@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { engine, methodGuard, parseCategorySetting, requireString, sendError } from '../lib/api-helpers';
-import type { CategorySetting } from '../lib/types';
-import type { Language } from '../lib/categories';
+import { engine, methodGuard, parseCategorySetting, requireString, sendError } from '../lib/api-helpers.js';
+import type { CategorySetting } from '../lib/types.js';
+import type { Language } from '../lib/categories.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!methodGuard(req, res, ['POST'])) return;

@@ -17,7 +17,7 @@
  * groep dat wél zou zien, wordt het gebruik van de knop zelf een aanwijzing.
  */
 
-import { Language } from './categories';
+import { Language } from './categories.js';
 
 export const MAX_EXPLAIN_WORDS = 3;
 

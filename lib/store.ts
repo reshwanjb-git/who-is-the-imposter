@@ -14,7 +14,7 @@
  * nieuwe kolommen (zie de opmerkingen daar).
  */
 
-import type { Answer, Assignment, Player, Room, Round, Vote } from './types';
+import type { Answer, Assignment, Player, Room, Round, Vote } from './types.js';
 
 export interface Store {
   // ---- rooms -----------------------------------------------------------

@@ -6,7 +6,7 @@
  * (memory-store.ts / supabase-store.ts) als de game-engine en de API-routes.
  */
 
-import type { CategoryId, Language } from './categories';
+import type { CategoryId, Language } from './categories.js';
 
 export type Phase =
   | 'lobby'

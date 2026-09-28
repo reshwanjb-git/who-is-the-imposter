@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { engine, methodGuard, requireString, sendError } from '../lib/api-helpers';
+import { engine, methodGuard, requireString, sendError } from '../lib/api-helpers.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!methodGuard(req, res, ['GET'])) return;

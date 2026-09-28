@@ -8,9 +8,9 @@
  * krijgt zijn eigen geheugen, dus dit deelt niets tussen requests.
  */
 
-import type { Answer, Assignment, Player, Room, Round, Vote } from './types';
-import type { Store } from './store';
-import { makeToken as generateToken } from './token';
+import type { Answer, Assignment, Player, Room, Round, Vote } from './types.js';
+import type { Store } from './store.js';
+import { makeToken as generateToken } from './token.js';
 
 function randomId(): string {
   return crypto.randomUUID();

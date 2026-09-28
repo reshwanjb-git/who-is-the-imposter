@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { GameEngine } from './game-engine';
-import { SupabaseStore } from './supabase-store';
-import { getSupabaseAdmin } from './supabase-admin';
-import { GameEngineError, type CategorySetting, type GameError } from './types';
-import { CATEGORY_IDS } from './categories';
+import { GameEngine } from './game-engine.js';
+import { SupabaseStore } from './supabase-store.js';
+import { getSupabaseAdmin } from './supabase-admin.js';
+import { GameEngineError, type CategorySetting, type GameError } from './types.js';
+import { CATEGORY_IDS } from './categories.js';
 
 export function engine(): GameEngine {
   return new GameEngine(new SupabaseStore(getSupabaseAdmin()));

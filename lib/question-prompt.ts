@@ -21,7 +21,7 @@ import {
   ShiftAxis,
   getCategory,
   pickPairType,
-} from './categories';
+} from './categories.js';
 
 export interface QuestionPromptInput {
   /** Taal van de kamer. Bepaalt de taal van de vragen én van de voorbeelden. */

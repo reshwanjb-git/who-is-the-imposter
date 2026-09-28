@@ -9,9 +9,9 @@
  */
 
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Store } from './store';
-import type { Answer, Assignment, Player, Room, Round, Vote } from './types';
-import { makeToken } from './token';
+import type { Store } from './store.js';
+import type { Answer, Assignment, Player, Room, Round, Vote } from './types.js';
+import { makeToken } from './token.js';
 
 export class SupabaseStore implements Store {
   constructor(private db: SupabaseClient) {}

@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { engine } from '../lib/api-helpers';
+import { engine } from '../lib/api-helpers.js';
 
 /**
  * Wordt elk uur aangeroepen door de Vercel Cron job in vercel.json.

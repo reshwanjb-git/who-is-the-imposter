@@ -15,7 +15,7 @@
  * (zie pickFallbackPair in de game-engine).
  */
 
-import type { CategoryId, Language } from './categories';
+import type { CategoryId, Language } from './categories.js';
 
 export interface FallbackPair {
   id: string;

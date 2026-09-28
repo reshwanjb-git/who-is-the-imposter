@@ -7,9 +7,9 @@
  * lib/fallback-questions.ts. De app is dus altijd speelbaar.
  */
 
-import { buildQuestionPrompt, parseQuestionPair } from './question-prompt';
-import { pickFallbackPairForCategory } from './fallback-questions';
-import { pickRandomCategory, type CategoryId, type Language } from './categories';
+import { buildQuestionPrompt, parseQuestionPair } from './question-prompt.js';
+import { pickFallbackPairForCategory } from './fallback-questions.js';
+import { pickRandomCategory, type CategoryId, type Language } from './categories.js';
 
 export interface GeneratedQuestion {
   category: CategoryId;

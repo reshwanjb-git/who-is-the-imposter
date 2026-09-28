@@ -24,13 +24,13 @@
  *    door zelf verlaten") en draagt de host-rol dan automatisch over.
  */
 
-import type { CategoryId, Language } from './categories';
-import { getCategory } from './categories';
-import type { Store } from './store';
-import { makeToken } from './token';
-import { generateRoomCode } from './room-code';
-import { generateQuestionPair } from './question-generator';
-import { buildExplainPrompt, parseExplanation, validateExplainInput, EXPLAIN_UI_TEXT } from './explain-prompt';
+import type { CategoryId, Language } from './categories.js';
+import { getCategory } from './categories.js';
+import type { Store } from './store.js';
+import { makeToken } from './token.js';
+import { generateRoomCode } from './room-code.js';
+import { generateQuestionPair } from './question-generator.js';
+import { buildExplainPrompt, parseExplanation, validateExplainInput, EXPLAIN_UI_TEXT } from './explain-prompt.js';
 import type {
   Answer,
   CategorySetting,
@@ -42,8 +42,8 @@ import type {
   Round,
   RevealedAnswer,
   RevealedVote,
-} from './types';
-import { GameEngineError } from './types';
+} from './types.js';
+import { GameEngineError } from './types.js';
 
 const MIN_PLAYERS = 3;
 const MAX_PLAYERS = 10;
